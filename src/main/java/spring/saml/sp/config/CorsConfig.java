@@ -15,10 +15,11 @@ public class CorsConfig {
     public FilterRegistrationBean<CorsFilter> corsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
-//        config.setAllowCredentials(true); // 쿠키와 세션 허용
-        config.setAllowedOrigins(List.of("*"));  // 모든 도메인 허용
+        config.setAllowCredentials(true); // 쿠키와 세션 허용
+        config.setAllowedOrigins(List.of("http://localhost:8081", "http://localhost:3000"));
+        config.setAllowedOriginPatterns(List.of("null")); // 명시적으로 null 허용
         config.setAllowedHeaders(List.of("*"));
-        config.setAllowedMethods(List.of("*"));  // 모든 HTTP 메서드 허용
+        config.setAllowedMethods(List.of("GET", "POST", "OPTIONS"));
         source.registerCorsConfiguration("/**", config);
 
         FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<>(new CorsFilter(source));
